@@ -9,40 +9,48 @@ import MachineMaintenance from "./(Home)/_components/MachineMaintenance";
 
 const { description, title, ogImage, keywords } = SEODATA.home;
 export const metadata: Metadata = {
-	title: title,
-	description: description,
-	keywords: keywords,
-	icons: ogImage,
-	openGraph: {
-		images: [
-			{
-				url: ogImage ?? "",
-			},
-		],
-	},
+  title: title,
+  description: description,
+  keywords: keywords,
+  icons: ogImage,
+  openGraph: {
+    images: [
+      {
+        url: ogImage ?? "",
+      },
+    ],
+  },
 };
 
 const page = () => {
-	return (
-		<AppLayout>
-			<AllCategorySection />
-			<div className='mx-auto pl-2 mt-4'>
-				<SortedProducts />
-			</div>
-			<MachineMaintenance />
-			<div className='pt-4 px-2 sm:px-0 mx-auto max-w-[1256px] mt-6 sm:mt-12'>
-				<div className='mt-4 sm:mt-3'>
-					<section className='flex w-full flex-col items-center pt-16 text-center'>
-						<h3 className='font-semibold text-xl sm:text-2xl slg:text-4xl tracking-tighter'>
-							Frequently Asked Question
-						</h3>
-						<FaqAccordion />
-					</section>
-				</div>
-			</div>
-			<AppMenu />
-		</AppLayout>
-	);
+  return (
+    <AppLayout>
+      <AllCategorySection />
+      <div className="mx-auto pl-2 mt-4">
+        <SortedProducts />
+      </div>
+      <MachineMaintenance />
+      <div className="pt-4 px-2 sm:px-0 mx-auto bg-black h-[474px] max-w-full mt-6 sm:mt-12">
+        <article className="text-white w-[80%] md:w-[60%] m-auto mt-[100px] text-center">
+          <h2 className="text-2xl md:text-5xl">
+            Get started for free in 10 minutes
+          </h2>
+          <div className="w-[80%] md:w-[70%] m-auto mt-[30px]">
+            <p>
+              Get all the best technology services for your business growth for
+              free. <br/>Open the last current account you will ever need for your
+              business
+            </p>
+
+			<button className="bg-[#97A402] mt-[50px] md:w-[200px]  px-5 py-3 text-[#fff] rounded-md hover:opacity-[0.8]">
+				Get Started
+			</button>
+          </div>
+        </article>
+      </div>
+      <AppMenu />
+    </AppLayout>
+  );
 };
 
 export default page;

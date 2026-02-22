@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 
 // 1. Core Configuration Constants
-export const SITE_NAME = "Nestora Digital Innovations";
+export const SITE_NAME = "ERKOTRON SYSTEMS LIMITED";
 export const SITE_URL =
 	process.env.NEXT_PUBLIC_SITE_URL || "https://nestora.digital"; // Update with actual URL
-export const TWITTER_HANDLE = "@NestoraDigital";
+export const TWITTER_HANDLE = "@ekroton";
 
 interface SEOConfig {
 	title: string;
