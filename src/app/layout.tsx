@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter ,Poppins} from "next/font/google";
 
 // Styles
 import "swiper/css";
@@ -13,11 +13,22 @@ import "@styles/globals.css";
 import AppProvider from "@src/components/config/AppProvider";
 import { SEODATA, SITE_NAME, SITE_URL } from "@constants/seoContants";
 
+import { Playfair_Display } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-playfair",
+});
+
+
 const inter = Inter({
 	subsets: ["latin-ext"],
 	weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
 	display: "swap", // Professional standard for performance
 });
+
+
 
 // 1. Professional Viewport Configuration
 // Separated from metadata as per Next.js 15+ standards
@@ -103,7 +114,7 @@ export default function RootLayout({
 	return (
 		<html lang='en' className='scroll-smooth'>
 			<body
-				className={`${inter.className} w-full min-h-screen antialiased bg-white text-slate-900`}
+				className={`${playfair.className} w-full min-h-screen antialiased bg-white text-slate-900`}
 			>
 				<AppProvider>
 					{/* Main Content */}
