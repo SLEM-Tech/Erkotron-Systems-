@@ -7,9 +7,9 @@ import img7 from "../../../../public/images/img7.png"
 
 const MachineMaintenance = () => {
   return (
-    <section className="w-full grid grid-cols-1 md:grid-cols-2 min-h-[800px] bg-white overflow-hidden">
+    <section className="max-w-[1350px] mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[800px] bg-white overflow-hidden">
       {/* 1. Content Section (Left) */}
-      <div className="bg-[#FFFFFF] flex flex-col justify-center p-8 sm:p-12 md:p-16 lg:p-24 space-y-8">
+      <div className="bg-[#fff] flex flex-col justify-center p-8 sm:p-12 md:p-0 space-y-8 h-[500px]">
         {/* Main Heading */}
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-black ">
           Our products are 100% guarantee to last for at least 10 years.
@@ -25,8 +25,9 @@ const MachineMaintenance = () => {
       </div>
 
       {/* 2. Visual Section (Right) */}
-      <div className="relative h-[350px] md:h-auto">
+      <div className="relative h-[350px] md:h-[500px]">
         <Picture
+        
           src={img7} // Path to your hardware image
           alt="Close up of internal computer components"
           className="w-full h-full object-cover"

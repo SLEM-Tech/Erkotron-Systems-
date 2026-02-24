@@ -102,25 +102,40 @@ const Header = () => {
     { id: 3, onClick: onOpenCart, icon: <FiShoppingCart />, label: "Cart" },
   ];
 
+  const navLinks = [
+    {
+      id: 1,
+      href: "/",
+      label: "Home",
+    },
+    {
+      id: 2,
+      href: "/category",
+      label: "Shop",
+    },
+    { id: 4, href: "/contact-us", label: "Contact" },
+  ];
   return (
-    <div className="z-[100] fixed top-0 w-full">
-      <div className="w-full !h-[46px] relative z-[1000] bg-[#97A402] text-white flex justify-center items-center"><h3 className="text-center text-[16px] !font-poppins">Rated 4.8-stars across 20k+ reviews</h3></div>
-      <header className="flex flex-col !h-[99px] w-full !bg-[#FFFFFF]  border-b !border-[#F6F4EF] shadow-2xl transition-all">
+    <>
+      <header className="flex flex-col w-full bg-[#fff] z-[100] fixed top-0 border-b border-white/5 shadow-2xl transition-all">
         {/* Desktop Header */}
-        <div className="hidden slg:grid grid-cols-10 items-center justify-between w-full py-3 max-w-[1440px] px-8 mx-auto">
-          {/* 1. Logo */}
-          <div className="col-span-2">
-            <LogoImage className="!w-[35px] cursor-pointer brightness-200" />
+        <div className="hidden slg:flex items-center justify-between w-full py-3 max-w-[1350px]  mx-auto">
+         
+          <div className="hidden md:flex gap-20">
+            <h1 className="text-4xl font-bold">
+              <a href="/">Logo</a>
+            </h1>
+            <HomePageBottomHeader />
           </div>
 
           {/* 2. Search Bar */}
-          <div className="col-span-6 flex justify-center px-12">
+          <div className="col-span-6 flex justify-center w-[550px] px-12">
             <div className="relative w-full max-w-[550px] group">
-              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-gray-500 transition-colors" />
+              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" />
               <input
                 type="text"
                 placeholder="Search hardware, accessories..."
-                className="w-full h-11 text-sm text-white rounded-full pl-12 pr-5 border border-white/10 outline-none focus:border-gray-500/50 transition bg-[#D9D9D9]"
+                className="w-full h-11 text-sm text-white rounded-full pl-12 pr-5 border border-gray/10 outline-none focus:border-gray-500/50 transition bg-[#fff]"
                 onChange={(e) => setSearchValue(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               />
@@ -133,7 +148,7 @@ const Header = () => {
             <Menu as="div" className="relative inline-block text-left">
               {({ open }) => (
                 <>
-                  <Menu.Button className="flex items-center gap-2 bg-[#111111] hover:!bg-black border border-white/10 px-3 py-2 rounded-xl cursor-pointer hover:bg-white/5 transition group outline-none">
+                  <Menu.Button className="flex items-center gap-2 bg-[#111111] border border-white/10 px-3 py-2 rounded-xl cursor-pointer hover:bg-gray/5 transition group outline-none">
                     {/* @ts-ignore */}
                     <Flag
                       code={baseCurrency?.countryCode || "NG"}
@@ -183,7 +198,7 @@ const Header = () => {
 
             {/* Cart */}
             <div className="relative cursor-pointer group" onClick={onOpenCart}>
-              <FiShoppingBag className="text-2xl text-gray-300 group-hover:text-black transition" />
+              <FiShoppingBag className="text-2xl text-gray-300 group-hover:text-blue-500 transition" />
               {totalItems > 0 && (
                 <span className="absolute -top-1.5 -right-1.5 size-5 bg-blue-600 text-white text-[10px] font-black flex items-center justify-center rounded-full border-2 border-black">
                   {totalItems}
@@ -203,7 +218,7 @@ const Header = () => {
                         className="size-9 rounded-full border border-white/10"
                       />
                     ) : (
-                      <div className="size-9 rounded-full bg-[#D9D9D9] text-white flex items-center justify-center font-black text-xs">
+                      <div className="size-9 rounded-full bg-gray-600 text-white flex items-center justify-center font-black text-xs">
                         {getFirstCharacter(wc_customer_info?.first_name || "U")}
                       </div>
                     )}
@@ -281,13 +296,13 @@ const Header = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <FiMenu
-                className="text-2xl text-gray-500"
+                className="text-2xl text-black"
                 onClick={() => setDrawerVisible(true)}
               />
               <LogoImage className="!w-[30px] brightness-200" />
             </div>
             <div onClick={onOpenCart} className="relative">
-              <FiShoppingBag className="text-2xl text-gray-500" />
+              <FiShoppingBag className="text-2xl text-black" />
               {totalItems > 0 && (
                 <span className="absolute -top-2 -right-2 size-4 bg-blue-600 rounded-full text-[9px] flex items-center justify-center text-white">
                   {totalItems}
@@ -318,8 +333,8 @@ const Header = () => {
         ) : pathname.includes("/home-item") ? (
           <ProductPageBottomHeader />
         ) : (
-        //   <HomePageBottomHeader />
-		""
+          //   <HomePageBottomHeader />
+          ""
         )}
       </header>
 
@@ -341,7 +356,7 @@ const Header = () => {
         closeDrawer={() => setDrawerVisible(false)}
         drawerVisible={drawerVisible}
       />
-    </div>
+    </>
   );
 };
 

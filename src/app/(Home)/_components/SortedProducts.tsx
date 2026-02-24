@@ -29,7 +29,8 @@ export const Loader = () => (
 );
 
 const SortedProducts = () => {
-  const sliderRef = useRef<HTMLDivElement>(null);
+  // Create a Map to store refs for each category
+  const sliderRefs = useRef<Map<string, HTMLDivElement>>(new Map());
   const [maxScrollTotal, setMaxScrollTotal] = useState(0);
   const [scrollLeftTotal, setScrollLeftTotal] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -43,7 +44,7 @@ const SortedProducts = () => {
     isLoading: categoryWpIsLoading,
     isError: categoryIsError,
   } = useCategories("");
-
+  console.log(categories);
   // State to hold products by category
   const [categoryProductsMap, setCategoryProductsMap] = useState<{
     [key: string]: ProductType[];
@@ -92,31 +93,35 @@ const SortedProducts = () => {
     }
   }, [categories]);
 
-  const TotalCategoryProductsMap: any = categoryProductsMap?.length;
-
-  const handleNext = () => {
-    if (sliderRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
-      const maxScroll = scrollWidth - clientWidth;
-      setScrollLeftTotal(scrollLeft);
-      setMaxScrollTotal(maxScroll);
-
-      sliderRef.current.scrollLeft += 600; // Adjust the scroll distance as needed
-      setCurrentIndex((prevIndex) =>
-        prevIndex < TotalCategoryProductsMap - 1 ? prevIndex + 1 : prevIndex,
-      );
+  // Callback ref setter
+  const setSliderRef = (categoryId: string) => (el: HTMLDivElement | null) => {
+    if (el) {
+      sliderRefs.current.set(categoryId, el);
     }
   };
 
-  const handlePrev = () => {
-    if (sliderRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
+  const handleNext = (categoryId?: string) => {
+    if (!categoryId) return;
+    const sliderRef = sliderRefs.current.get(categoryId);
+    if (sliderRef) {
+      const { scrollLeft, scrollWidth, clientWidth } = sliderRef;
       const maxScroll = scrollWidth - clientWidth;
       setScrollLeftTotal(scrollLeft);
       setMaxScrollTotal(maxScroll);
-      // console.log(scrollLeft);
+      sliderRef.scrollLeft += 600;
+    }
+  };
+
+  const handlePrev = (categoryId?: string) => {
+    if (!categoryId) return;
+    const sliderRef = sliderRefs.current.get(categoryId);
+    if (sliderRef) {
+      const { scrollLeft, scrollWidth, clientWidth } = sliderRef;
+      const maxScroll = scrollWidth - clientWidth;
+      setScrollLeftTotal(scrollLeft);
+      setMaxScrollTotal(maxScroll);
       if (scrollLeft > 0) {
-        sliderRef.current.scrollLeft -= 600; // Adjust the scroll distance as needed
+        sliderRef.scrollLeft -= 600;
         setCurrentIndex((prevIndex) =>
           prevIndex > 0 ? prevIndex - 1 : prevIndex,
         );
@@ -133,21 +138,15 @@ const SortedProducts = () => {
   };
 
   return (
-    <>
-      <div
-        style={{
-          background:
-            "linear-gradient(135deg, #EDEDF5 0%, rgba(246,246,210,0.24) 100%)",
-        }}
-        className="mb-8 lg:mb-16"
-      >
+    <div className="max-w-[1350px] mx-auto">
+      <div className="mb-8 lg:mb-16 border">
         <div className="space-y-5 md:space-y-10">
           {categories
             ?.filter((category: CategoryType) => category?.count > 0)
             ?.slice(0, 5)
             ?.map((category: CategoryType) => (
               <div key={category?.id} className="space-y-4 overflow-visible">
-                <div className="w-full items-center flex justify-between sm:px-2">
+                <div className="w-full max-w-[1350px] mx-auto mb-10 mt-20 items-center flex justify-between pr-2 lg:pr-2">
                   <Link
                     href={`${
                       "/category/" +
@@ -161,7 +160,7 @@ const SortedProducts = () => {
                     dangerouslySetInnerHTML={{
                       __html: category?.name,
                     }}
-                    className="text-lg sm:text-xl md:text-2xl w-4/5 font-medium tracking-tight text-black line-clamp-2"
+                    className=" text-lg sm:text-xl md:text-2xl w-4/5 font-medium tracking-tight text-black line-clamp-2"
                   />
                   <Link
                     href={`${
@@ -173,56 +172,60 @@ const SortedProducts = () => {
                     onClick={() =>
                       handleCategoryClick(category?.name, category?.id)
                     }
-                    className="text-sm font-medium tracking-tight text-black hover:text-primary transition hover:underline underline-offset-4"
+                    className="pr-text-sm font-medium tracking-tight text-black hover:text-primary transition hover:underline"
                   >
                     See all
                   </Link>
                 </div>
                 {/* Show loader when category products are loading */}
-                <Carousel
-                  totalDataNumber={TotalCategoryProductsMap}
-                  maxScrollTotal={maxScrollTotal}
-                  scrollLeftTotal={scrollLeftTotal}
-                  handleNext={handleNext}
-                  handlePrev={handlePrev}
-                >
-                  <div
-                    ref={sliderRef}
-                    className="flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth pb-4"
-                    style={{
-                      scrollbarWidth: "none" /* Firefox */,
-                      msOverflowStyle: "none" /* IE/Edge */,
-                    }}
+                <div className="max-w-[1350px] mx-auto pr-8">
+                  <Carousel
+                    totalDataNumber={
+                      categoryProductsMap[category?.id]?.length || 0
+                    }
+                    maxScrollTotal={maxScrollTotal}
+                    scrollLeftTotal={scrollLeftTotal}
+                    handleNext={() => handleNext(category?.id?.toString())}
+                    handlePrev={() => handlePrev(category?.id?.toString())}
                   >
-                    {isLoading ? (
-                      <Loader />
-                    ) : (
-                      categoryProductsMap[category?.id]?.map(
-                        (product: ProductType) => (
-                          <div
-                            key={product.id}
-                            className="flex-shrink-0 snap-start first:pl-4 last:pr-4 sm:first:pl-0 sm:last:pr-0"
-                          >
-                            <ProductCard2
-                              id={product?.id}
-                              image={product?.images[0]?.src}
-                              oldAmount={product?.regular_price}
-                              newAmount={product?.price}
-                              description={product?.name}
-                            />
-                          </div>
-                        ),
-                      )
-                    )}
-                  </div>
-                </Carousel>
+                    <div
+                      ref={setSliderRef(category?.id?.toString())}
+                      className="w-full max-w-[1350px] mx-auto flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth pb-4"
+                      style={{
+                        scrollbarWidth: "none" /* Firefox */,
+                        msOverflowStyle: "none" /* IE/Edge */,
+                      }}
+                    >
+                      {isLoading ? (
+                        <Loader />
+                      ) : (
+                        categoryProductsMap[category?.id]?.map(
+                          (product: ProductType) => (
+                            <div
+                              key={product.id}
+                              className="flex-shrink-0 snap-start"
+                            >
+                              <ProductCard2
+                                id={product?.id}
+                                image={product?.images[0]?.src}
+                                oldAmount={product?.regular_price}
+                                newAmount={product?.price}
+                                description={product?.name}
+                              />
+                            </div>
+                          ),
+                        )
+                      )}
+                    </div>
+                  </Carousel>
+                </div>
               </div>
             ))}
         </div>
       </div>
 
       <GlobalLoader isPending={categoryWpIsLoading || isPending} />
-    </>
+    </div>
   );
 };
 

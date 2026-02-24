@@ -130,7 +130,7 @@ const AllCategorySection = () => {
   return (
     <>
       {/* Hero Concept inspired by the image */}
-      <div className="relative w-full mt-[100px] md:h-[652px] overflow-hidden pb-8 bg-[#EDEDF5]">
+      <div className="relative  mt-[100px] max-w-[1350px] mx-auto md:h-[652px] overflow-hidden pb-8 bg-[#EDEDF5]">
         <div className="flex flex-col md:flex-row justify-between h-full w-full gap-2">
           <div className="mt-[100px] md:mt-[200px] max-w-[500px] pl-10 pb-[5px]">
             <h1 className="text-black text-2xl md:text-5xl">
@@ -154,23 +154,23 @@ const AllCategorySection = () => {
         </div>
       </div>
       {/* Category Section Styling Idea */}
-      <div className="grid grid-cols-2 md:grid-cols-4 items-center mx-auto  gap-3 bg-white w-[80%] h-[300px] md:h-[205px]">
-        <div className="text-cente">
+      <div className="grid grid-cols-2 md:grid-cols-4 items-center mx-auto max-w-[1350px] gap-3 bg-white w-[80%] h-[300px] md:h-[205px]">
+        <div className="text-center">
           <Picture className="h-[50px] w-[50px] m-auto" src={img6} alt="img6" />
           <h4 className="font-bold ">Secure Payment</h4>
           <h5>100% secure payment</h5>
         </div>
-        <div className="text-cente">
+        <div className="text-center">
           <Picture className="h-[50px] w-[50px] m-auto" src={img4} alt="img6" />
           <h4 className="font-bold ">30 Days Return</h4>
           <h5>If goods have problems</h5>
         </div>
-        <div className="text-cente">
+        <div className="text-center">
           <Picture className="h-[50px] w-[50px] m-auto" src={img5} alt="img6" />
           <h4 className="font-bold ">24/7 Support</h4>
           <h5>Dedicated support</h5>
         </div>
-        <div className="text-cente">
+        <div className="text-center">
           <Picture className="h-[50px] w-[50px] m-auto" src={img3} alt="img6" />
           <h4 className="font-bold ">Free Delivery</h4>
           <h5>For all order over 80$</h5>
