@@ -38,6 +38,7 @@ import HomePageBottomHeader from "./HomePageBottomHeader";
 import { FaCartArrowDown } from "@node_modules/react-icons/fa";
 import { BiUser } from "@node_modules/react-icons/bi";
 import { ImSpinner2 } from "@node_modules/react-icons/im";
+import { MdOutlinePerson2 } from "@node_modules/react-icons/md";
 
 const Header = () => {
   const pathname = usePathname();
@@ -120,11 +121,8 @@ const Header = () => {
       <header className="flex flex-col w-full bg-[#fff] z-[100] fixed top-0 border-b border-white/5 shadow-2xl transition-all">
         {/* Desktop Header */}
         <div className="hidden slg:flex items-center justify-between w-full py-3 max-w-[1350px]  mx-auto">
-         
-          <div className="hidden md:flex gap-20">
-            <h1 className="text-4xl font-bold">
-              <a href="/">Logo</a>
-            </h1>
+          <div className="hidden md:flex gap-20 items-center">
+            <LogoImage className="!w-[300px] h-10 cursor-pointer brightness-200" />
             <HomePageBottomHeader />
           </div>
 
@@ -135,7 +133,7 @@ const Header = () => {
               <input
                 type="text"
                 placeholder="Search hardware, accessories..."
-                className="w-full h-11 text-sm text-white rounded-full pl-12 pr-5 border border-gray/10 outline-none focus:border-gray-500/50 transition bg-[#fff]"
+                className="w-full h-11 text-sm text-gray-600 rounded-full pl-12 pr-5 border border-gray/10 outline-none focus:border-gray-500/50 transition bg-[#fff]"
                 onChange={(e) => setSearchValue(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               />
@@ -198,9 +196,9 @@ const Header = () => {
 
             {/* Cart */}
             <div className="relative cursor-pointer group" onClick={onOpenCart}>
-              <FiShoppingBag className="text-2xl text-gray-300 group-hover:text-blue-500 transition" />
+              <FiShoppingBag className="text-2xl text-gray-600 group-hover:text-[#EAF586] transition" />
               {totalItems > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 size-5 bg-blue-600 text-white text-[10px] font-black flex items-center justify-center rounded-full border-2 border-black">
+                <span className="absolute -top-1.5 -right-1.5 size-5 bg-[#EAF586] text-black text-[10px] font-black flex items-center justify-center rounded-full border-2 border-black">
                   {totalItems}
                 </span>
               )}
@@ -212,14 +210,12 @@ const Header = () => {
                 <>
                   <Menu.Button className="flex items-center gap-2 cursor-pointer group outline-none focus:ring-0">
                     {wc_customer_info?.shipping?.address_2 ? (
-                      <Picture
-                        src={wc_customer_info.shipping.address_2}
-                        alt="user"
-                        className="size-9 rounded-full border border-white/10"
-                      />
-                    ) : (
                       <div className="size-9 rounded-full bg-gray-600 text-white flex items-center justify-center font-black text-xs">
                         {getFirstCharacter(wc_customer_info?.first_name || "U")}
+                      </div>
+                    ) : (
+                      <div className="size-9 rounded-full bg-gray-200 text-white flex items-center justify-center font-black text-xs">
+                        <MdOutlinePerson2 size="25px" color="black" />
                       </div>
                     )}
                     <SlArrowDown
@@ -299,7 +295,7 @@ const Header = () => {
                 className="text-2xl text-black"
                 onClick={() => setDrawerVisible(true)}
               />
-              <LogoImage className="!w-[30px] brightness-200" />
+              <LogoImage className="!w-[100px] brightness-200" />
             </div>
             <div onClick={onOpenCart} className="relative">
               <FiShoppingBag className="text-2xl text-black" />
