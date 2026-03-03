@@ -132,7 +132,7 @@ const AllCategorySection = () => {
       {/* Hero Concept inspired by the image */}
       <div className="relative  mt-[100px] max-w-[1350px] mx-auto md:h-[652px] overflow-hidden pb-8 bg-[#EDEDF5]">
         <div className="flex flex-col md:flex-row justify-between h-full w-full gap-2">
-          <div className="mt-[100px] md:mt-[200px] max-w-[500px] pl-10 pb-[5px]">
+          <div className="mt-[50px]  md:mt-[200px] max-w-[500px] px-8 pb-[15px]">
             <h1 className="text-black text-2xl md:text-5xl">
               Buy Your Top Notch Accessories
             </h1>
@@ -141,9 +141,14 @@ const AllCategorySection = () => {
               feeling of loss is so apparent when you are far from the ones you
               love.
             </p>
-            <button className="bg-black  px-5 py-3 text-[#EAF586] rounded-md hover:opacity-[0.8]">
-              Order Now
-            </button>
+            <div className="">
+              <Link
+                href="/category"
+                className="bg-black  px-5 py-3 text-[#EAF586] rounded-md hover:opacity-[0.8]"
+              >
+                Order Now
+              </Link>
+            </div>
           </div>
           <div>
             <Picture className="h-full !w-[491px]" src={img2} alt="laptop" />

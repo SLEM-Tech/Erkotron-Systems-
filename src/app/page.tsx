@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import AppMenu from "@src/components/Navbars/AppMenu";
 import FaqAccordion from "@src/components/Reusables/Accordion/FaqAccordion";
 import MachineMaintenance from "./(Home)/_components/MachineMaintenance";
+import Link from "next/link";
 
 const { description, title, ogImage, keywords } = SEODATA.home;
 export const metadata: Metadata = {
@@ -38,17 +39,21 @@ const page = () => {
           <div className="w-[80%] md:w-[70%] m-auto mt-[30px]">
             <p>
               Get all the best technology services for your business growth for
-              free. <br/>Open the last current account you will ever need for your
-              business
+              free. <br />
+              Open the last current account you will ever need for your business
             </p>
-
-			<button className="bg-[#97A402] mt-[50px] md:w-[200px]  px-5 py-3 text-[#fff] rounded-md hover:opacity-[0.8]">
-				Get Started
-			</button>
+            <div className="mt-[50px]">
+              <Link
+                href="/user/login"
+                className="bg-[#97A402] md:w-[200px] px-5 py-3 text-[#fff] rounded-md hover:opacity-[0.8]"
+              >
+                Get Started
+              </Link>
+            </div>
           </div>
         </article>
       </div>
-      <AppMenu />
+      {/* <AppMenu /> */}
     </AppLayout>
   );
 };
