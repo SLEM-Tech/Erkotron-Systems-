@@ -15,29 +15,32 @@ const ContactCards = () => {
 	// console.log("GeneralSettings", GeneralSettings);
 
 	const contactCardData = [
-		{
-			id: 1,
-			title: "Email Us",
-			type: "email",
-			icon: <RxEnvelopeClosed className='text-primary text-2xl xl:text-4xl' />,
-			additionalText: GeneralSettings ? GeneralSettings[0]?.value : "N/A",
-		},
-		{
-			id: 2,
-			title: "Call Us",
-			icon: <FiPhoneCall className='text-primary text-2xl xl:text-4xl' />,
-			type: "tel",
-			additionalText: GeneralSettings ? GeneralSettings[1]?.value : "N/A",
-		},
-		{
-			id: 3,
-			title: "Location",
-			type: "text",
-			icon: <IoLocationOutline className='text-primary text-2xl xl:text-4xl' />,
-			description: GeneralSettings ? GeneralSettings[2]?.value : "N/A",
-		},
-		// Add more contact card data here if needed
-	];
+    {
+      id: 1,
+      title: "Email Us",
+      type: "email",
+      icon: <RxEnvelopeClosed className="text-primary text-2xl xl:text-4xl" />,
+      additionalText: "contact@interstitalcystitis.com",
+      // additionalText: GeneralSettings ? GeneralSettings[0]?.value : "N/A",
+    },
+    {
+      id: 2,
+      title: "Call Us",
+      icon: <FiPhoneCall className="text-primary text-2xl xl:text-4xl" />,
+      type: "tel",
+      additionalText: "09069572941",
+      //   additionalText: GeneralSettings ? GeneralSettings[1]?.value : "N/A",
+    },
+    {
+      id: 3,
+      title: "Location",
+      type: "text",
+      icon: <IoLocationOutline className="text-primary text-2xl xl:text-4xl" />,
+      description: "10, BEHIND PAPA HIGH SCHOOL, PAPALANTO, OGUN STATE",
+      //   description: GeneralSettings ? GeneralSettings[2]?.value : "N/A",
+    },
+    // Add more contact card data here if needed
+  ];
 	return (
 		<>
 			{generalSettings &&
