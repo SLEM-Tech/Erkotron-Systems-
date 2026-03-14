@@ -40,6 +40,8 @@ const AllCategorySection = () => {
     isError: categoryIsError,
   } = useCategories("");
 
+
+  //@ts-ignore
   const Categories: CategoryType[] = categories;
   const TotalCatgory = Categories?.length - 1;
 

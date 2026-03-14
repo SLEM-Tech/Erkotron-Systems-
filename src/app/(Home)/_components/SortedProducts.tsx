@@ -142,9 +142,16 @@ const SortedProducts = () => {
       <div className="mb-8 lg:mb-16 border">
         <div className="space-y-5 md:space-y-10">
           {categories
-            ?.filter((category: CategoryType) => category?.count > 0)
-            ?.slice(0, 5)
-            ?.map((category: CategoryType) => (
+            ?.filter((c) =>
+              [
+                "computers-laptops",
+                "pc-components",
+                "peripherals-input",
+                "monitors-displays",
+                "networking-connectivity",
+              ].includes(c.slug),
+            )
+            .map((category: CategoryType) => (
               <div key={category?.id} className="space-y-4 overflow-visible">
                 <div className="w-full max-w-[1350px] mx-auto mb-10 mt-20 items-center flex justify-between pr-2 lg:pr-2">
                   <Link
